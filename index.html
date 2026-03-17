@@ -36,7 +36,13 @@
                     <div style="border-top: 1px solid black; width: 20px; margin-bottom: 4px;"></div>
                     <span class="text-body">12 Section Framework</span>
                 </div>
-                <ul class="nav-list" id="nav-list"></ul>
+                <ul class="nav-list" id="nav-list" style="display:none;"></ul>
+                <div class="nav-minimal" style="padding: var(--space-md); border-top: var(--border-thin);">
+                    <span class="label-micro" style="opacity: 0.5;">Progress</span>
+                    <div id="progress-bar" style="height: 2px; background: rgba(0,0,0,0.1); margin-top: 12px; position: relative;">
+                        <div id="progress-fill" style="position: absolute; top:0; left:0; height: 100%; background: var(--fg-black); width: 0%; transition: width 0.4s;"></div>
+                    </div>
+                </div>
             </nav>
 
             <main class="content-area">
@@ -53,58 +59,249 @@
     <div id="templates" style="display:none;">
         <!-- Title Section Template -->
         <section class="section-view" id="tpl-00">
-            <div class="gradient-burst"></div>
+            <div class="gradient-burst" style="background: radial-gradient(circle at 70% 30%, rgba(212, 65, 34, 0.15) 0%, transparent 70%);"></div>
             <div class="section-meta">
                 <div>
-                    <span class="label-micro">Project Deck</span>
+                    <span class="label-micro">Project Hub</span>
                     <div class="num-tabular" style="font-size: 1.5rem;">00</div>
                 </div>
             </div>
-            <div class="section-header" style="margin-top: 10vh;">
-                <h1 class="title-huge" id="display-title">THE<br>PROJECT<br>TITLE</h1>
-                <p class="title-large" style="margin-top: var(--space-md); font-size: 1.5rem; letter-spacing: 0; font-weight: 600;">
-                    ++ INTRO PLAN: A STRUCTURED FRAMEWORK FOR PRESENTING NEW PROJECTS
+            <div class="hero-content" style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; max-width: 900px; margin: 0 auto; margin-top: -5vh;">
+                <h1 class="title-huge" style="margin-bottom: var(--space-lg); line-height: 0.9; text-align: left; width: 100%;">Clarify the<br>Thinking before<br>the Pitch.</h1>
+                <p class="text-body" style="font-size: 1.4rem; max-width: 700px; margin-bottom: var(--space-xl); opacity: 0.9; line-height: 1.4; text-align: left; width: 100%; border-left: 3px solid var(--accent-red); padding-left: 32px;">
+                    Structurizer is your silent partner for the "moment before". We help you bridge the gap between a raw idea and a professional narrative through a structured, deep-dive methodology.
                 </p>
-            </div>
-            <div class="grid-2" style="margin-top: auto; border-top: var(--border-thin); padding-top: var(--space-md);">
-                <div>
-                    <span class="label-micro">Presenter</span>
-                    <p class="text-body" style="text-transform: uppercase; font-weight: bold;" id="display-presenter">--</p>
+                
+                <div class="input-trigger" style="width: 100%; position: relative; margin-top: 20px;">
+                    <label class="label-micro" style="display: block; margin-bottom: 12px; opacity: 0.6; text-align: left;">INITIAL CONCEPT TRIGGER</label>
+                    <textarea id="hero-input" class="text-body" placeholder="Describe your vision in a few sentences, and we'll build the narrative..." style="width: 100%; min-height: 180px; background: transparent; border: var(--border-thin); border-top: 4px solid var(--fg-black); padding: 32px; font-family: inherit; font-size: 1.2rem; color: inherit; resize: none; outline: none; transition: all 0.3s;"></textarea>
                 </div>
-                <div>
-                    <span class="label-micro">Classification</span>
-                    <p class="text-body">INTERNAL + CONFIDENTIAL</p>
-                </div>
+
+                <button class="btn-action" id="start-btn" style="margin-top: 48px; width: 100%; height: 80px; background: #000; color: #fff; border: none; font-family: inherit; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s;">Initialize Deep-Dive →</button>
             </div>
-            <button class="btn-action" id="start-btn" style="margin-top:40px; width:280px; height:60px; background:#000; color:#fff; border:none; font-family:inherit; font-weight:bold; letter-spacing:0.1em; text-transform:uppercase;">Initialize Framework →</button>
         </section>
 
-        <!-- Question Section Template -->
-        <section class="section-view" id="tpl-question">
+        <!-- Slide 1: Title -->
+        <section class="section-view" id="tpl-s1">
             <div class="section-meta">
-                <div><span class="label-micro">Section</span><div class="num-tabular" id="q-num" style="font-size: 1.5rem;">--</div></div>
-                <div><span class="label-micro">Topic</span><div class="text-body" id="q-slide" style="text-transform: uppercase;">--</div></div>
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">01 / 15</div></div>
             </div>
-            <div class="q-content">
-                <p class="label-micro" id="q-opener" style="margin-bottom:12px; opacity:0.6;">--</p>
-                <h2 class="title-large" id="q-title">--</h2>
-                <p class="text-body" id="q-guidance" style="margin-top:16px; max-width:600px; color:#555;">--</p>
+            <div style="flex: 1; display:flex; flex-direction:column; justify-content:center;">
+                <span class="label-micro" style="color:var(--accent-red);">PROJECT // INTRO PLAN</span>
+                <h1 class="title-huge" id="s1-title" contenteditable="true">PROJECT TITLE</h1>
+                <p class="text-body" style="margin-top:32px; opacity:0.6;">A STRUCTURED FRAMEWORK FOR PRESENTING NEW PROJECTS</p>
                 
-                <div class="chips-grid" id="q-chips" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:32px;"></div>
-
-                <div class="input-area" style="margin-top:48px;">
-                    <textarea id="q-input" class="text-body" placeholder="Type your answer here..." style="width:100%; min-height:200px; background:transparent; border:var(--border-thin); padding:24px; font-family:inherit; color:inherit; resize:none; outline:none;"></textarea>
-                    <div style="display:flex; justify-content:space-between; margin-top:12px;">
-                        <span class="label-micro" style="opacity:0.5;">CHARACTERS: <span id="char-count">0</span></span>
-                        <button class="label-micro btn-refine" id="refine-btn" style="background:none; border:none; text-decoration:underline;">++ Refine with AI</button>
-                    </div>
-                </div>
-
-                <div class="nav-controls" style="margin-top:64px; display:flex; gap:20px;">
-                    <button class="nav-btn-prev" style="flex:1; height:60px; background:transparent; border:var(--border-thin); font-family:inherit; font-weight:bold; letter-spacing:0.1em; text-transform:uppercase;">Back</button>
-                    <button class="nav-btn-next" style="flex:2; height:60px; background:#000; color:#fff; border:none; font-family:inherit; font-weight:bold; letter-spacing:0.1em; text-transform:uppercase;">Continue →</button>
+                <div class="grid-3" style="margin-top: 80px; border-top: var(--border-thin); padding-top: 24px;">
+                    <div><span class="label-micro">Status</span><p class="text-body">TEMPLATE — REUSABLE</p></div>
+                    <div><span class="label-micro">Presenter</span><input type="text" id="s1-presenter" class="text-body" style="background:none; border:none; width:100%;" placeholder="[NAME / TEAM]"></div>
+                    <div><span class="label-micro">Date</span><p class="text-body num-tabular" id="s1-date">--.--.----</p></div>
                 </div>
             </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 2: Meta (Instructions) -->
+        <section class="section-view" id="tpl-s2">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">02 / 15</div></div>
+            </div>
+            <h2 class="title-large" style="margin-bottom:40px; color:var(--accent-red);">HOW TO USE<br>THIS TEMPLATE</h2>
+            <div class="grid-2" style="flex:1;">
+                <div class="data-card">
+                    <span class="label-micro">STRUCTURE</span>
+                    <p class="text-body">Follow 12 slides in order for maximum narrative flow.</p>
+                </div>
+                <div class="data-card">
+                    <span class="label-micro">MODULARITY</span>
+                    <p class="text-body">Slides are independent; add/remove as needed for your specific context.</p>
+                </div>
+                <div class="data-card">
+                    <span class="label-micro">PLACEHOLDERS</span>
+                    <p class="text-body">Replace all [BRACKETED] text with your specific project data.</p>
+                </div>
+                <div class="data-card">
+                    <span class="label-micro">EVIDENCE FIRST</span>
+                    <p class="text-body">Avoid 'idea stage' language; use data points and validated findings.</p>
+                </div>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 3: 01 — Problem Statement -->
+        <section class="section-view" id="tpl-s3">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">03 / 15</div></div>
+            </div>
+            <h2 class="title-large" style="margin-bottom:40px;">WHAT IS<br>NOT WORKING?</h2>
+            <div class="grid-3" style="flex:1; gap:2px; background:var(--fg-black); border:var(--border-thin);">
+                <div style="background:var(--bg-grey); padding:24px;">
+                    <span class="label-micro" style="color:var(--accent-red);">01. THE PROBLEM</span>
+                    <textarea class="text-body" style="width:100%; height:150px; background:none; border:none; margin-top:20px; outline:none;" placeholder="Describe specific issues affecting people/business..."></textarea>
+                </div>
+                <div style="background:var(--bg-grey); padding:24px;">
+                    <span class="label-micro" style="color:var(--accent-red);">02. EVIDENCE</span>
+                    <textarea class="text-body" style="width:100%; height:150px; background:none; border:none; margin-top:20px; outline:none;" placeholder="Data points, quotes, or observations..."></textarea>
+                </div>
+                <div style="background:var(--bg-grey); padding:24px;">
+                    <span class="label-micro" style="color:var(--accent-red);">03. BUSINESS CASE</span>
+                    <textarea class="text-body" style="width:100%; height:150px; background:none; border:none; margin-top:20px; outline:none;" placeholder="Risk or cost of inaction..."></textarea>
+                </div>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 4: 02 — Solution -->
+        <section class="section-view" id="tpl-s4">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">04 / 15</div></div>
+            </div>
+            <h2 class="title-large" style="margin-bottom:40px;">FROM CURRENT STATE<br>→ TO FUTURE STATE</h2>
+            <div class="grid-2" style="flex:1;">
+                <div class="data-card" style="border-top:4px solid var(--fg-black);">
+                    <span class="label-micro">"BEFORE" (CURRENT FRICTION)</span>
+                    <textarea class="text-body" style="width:100%; height:200px; background:none; border:none; margin-top:20px; outline:none;" placeholder="Costs, manual workarounds, pain points..."></textarea>
+                </div>
+                <div class="data-card" style="border-top:4px solid var(--accent-red);">
+                    <span class="label-micro" style="color:var(--accent-red);">"AFTER" (FUTURE CAPABILITIES)</span>
+                    <textarea class="text-body" style="width:100%; height:200px; background:none; border:none; margin-top:20px; outline:none;" placeholder="Improved state, friction removed, unlocked potential..."></textarea>
+                </div>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 5: 03 — Target Clients -->
+        <section class="section-view" id="tpl-s5">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">05 / 15</div></div>
+            </div>
+            <h2 class="title-large" style="margin-bottom:40px;">WHO BENEFITS<br>— AND HOW?</h2>
+            <div class="grid-3" style="flex:1;">
+                <div class="data-card">
+                    <input type="text" class="label-micro" style="background:none; border:none; font-weight:800; width:100%; color:var(--accent-red);" placeholder="SEGMENT A">
+                    <input type="text" class="text-body" style="background:none; border:none; width:100%; font-weight:bold; margin:12px 0;" placeholder="[Role / Industry]">
+                    <textarea class="text-body" style="width:100%; height:120px; background:none; border:none; outline:none;" placeholder="Key pain points & daily improvements..."></textarea>
+                </div>
+                <div class="data-card">
+                    <input type="text" class="label-micro" style="background:none; border:none; font-weight:800; width:100%; color:var(--accent-red);" placeholder="SEGMENT B">
+                    <input type="text" class="text-body" style="background:none; border:none; width:100%; font-weight:bold; margin:12px 0;" placeholder="[Role / Industry]">
+                    <textarea class="text-body" style="width:100%; height:120px; background:none; border:none; outline:none;" placeholder="Key pain points & daily improvements..."></textarea>
+                </div>
+                <div class="data-card">
+                    <input type="text" class="label-micro" style="background:none; border:none; font-weight:800; width:100%; color:var(--accent-red);" placeholder="SEGMENT C">
+                    <input type="text" class="text-body" style="background:none; border:none; width:100%; font-weight:bold; margin:12px 0;" placeholder="[Role / Industry]">
+                    <textarea class="text-body" style="width:100%; height:120px; background:none; border:none; outline:none;" placeholder="Key pain points & daily improvements..."></textarea>
+                </div>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 6: 04 — Goal & CTQs -->
+        <section class="section-view" id="tpl-s6">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">06 / 15</div></div>
+            </div>
+            <h2 class="title-large">WHAT SUCCESS<br>LOOKS LIKE</h2>
+            <div style="flex:1; display:flex; flex-direction:column; gap:40px; margin-top:40px;">
+                <div class="data-card" style="border-left:4px solid var(--accent-red);">
+                    <span class="label-micro">PROJECT GOAL</span>
+                    <input type="text" class="text-body" style="background:none; border:none; width:100%; font-weight:bold; font-size:1.5rem;" placeholder="One sentence: Achievement, Timeline, Measurement.">
+                </div>
+                <div style="border:var(--border-thin);">
+                    <table style="width:100%; border-collapse: collapse; text-align:left;">
+                        <thead style="background:var(--fg-black); color:var(--bg-grey);">
+                            <tr>
+                                <th style="padding:12px; font-family:'Helvetica Neue'; font-size:10px; letter-spacing:0.1em;">CTQ DESCRIPTION</th>
+                                <th style="padding:12px; font-family:'Helvetica Neue'; font-size:10px; letter-spacing:0.1em;">TARGET</th>
+                                <th style="padding:12px; font-family:'Helvetica Neue'; font-size:10px; letter-spacing:0.1em;">MEASUREMENT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom:var(--border-thin);">
+                                <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;" placeholder="e.g. Processing Time"></td>
+                                <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;" placeholder="< 3 seconds"></td>
+                                <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;" placeholder="Backend Logs"></td>
+                            </tr>
+                            <tr style="border-bottom:var(--border-thin);">
+                                <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;" placeholder="e.g. Error Rate"></td>
+                                <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;" placeholder="< 0.1%"></td>
+                                <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;" placeholder="Monthly Audit"></td>
+                            </tr>
+                             <tr>
+                                <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;" placeholder="e.g. User Sat."></td>
+                                <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;" placeholder="> 4.5/5"></td>
+                                <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;" placeholder="Quarterly Survey"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 7: 05 — Scope Definition -->
+        <section class="section-view" id="tpl-s7">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">07 / 15</div></div>
+            </div>
+            <h2 class="title-large" style="margin-bottom:40px;">IN SCOPE<br>— OUT OF SCOPE</h2>
+            <div class="grid-2" style="flex:1;">
+                <div class="data-card">
+                    <span class="label-micro" style="color:var(--accent-red);">IN SCOPE (✓)</span>
+                    <textarea class="text-body" style="width:100%; flex:1; background:none; border:none; margin-top:20px; outline:none;" placeholder="Deliverables, features, geographies included..."></textarea>
+                </div>
+                <div class="data-card">
+                    <span class="label-micro">OUT OF SCOPE (✕)</span>
+                    <textarea class="text-body" style="width:100%; flex:1; background:none; border:none; margin-top:20px; outline:none;" placeholder="Explicitly excluded items, future phases..."></textarea>
+                </div>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 8: 06 — Competitive Landscape -->
+        <section class="section-view" id="tpl-s8">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">08 / 15</div></div>
+            </div>
+            <h2 class="title-large" style="margin-bottom:40px;">WHY US — WHAT<br>MAKES US DIFFERENT?</h2>
+            <div style="flex:1; border:var(--border-thin);">
+                 <table style="width:100%; border-collapse: collapse; text-align:left;">
+                    <thead style="background:var(--fg-black); color:var(--bg-grey);">
+                        <tr>
+                            <th style="padding:12px; font-family:'Helvetica Neue'; font-size:10px; letter-spacing:0.1em;">CRITERIA</th>
+                            <th style="padding:12px; font-family:'Helvetica Neue'; font-size:10px; letter-spacing:0.1em;">COMPETITOR A</th>
+                            <th style="padding:12px; font-family:'Helvetica Neue'; font-size:10px; letter-spacing:0.1em;">COMPETITOR B</th>
+                            <th style="padding:12px; font-family:'Helvetica Neue'; font-size:10px; letter-spacing:0.1em; color:var(--accent-red);">OUR APPROACH</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:var(--border-thin);">
+                            <td style="background:rgba(0,0,0,0.05); padding:12px; font-weight:800;">PRICE</td>
+                            <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;"></td>
+                            <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;"></td>
+                            <td style="background:rgba(0,0,0,0.02);"><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px; font-weight:800; color:var(--accent-red);"></td>
+                        </tr>
+                        <tr style="border-bottom:var(--border-thin);">
+                            <td style="background:rgba(0,0,0,0.05); padding:12px; font-weight:800;">SPEED</td>
+                            <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;"></td>
+                            <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;"></td>
+                            <td style="background:rgba(0,0,0,0.02);"><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px; font-weight:800; color:var(--accent-red);"></td>
+                        </tr>
+                        <tr style="border-bottom:var(--border-thin);">
+                            <td style="background:rgba(0,0,0,0.05); padding:12px; font-weight:800;">UX</td>
+                            <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;"></td>
+                            <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;"></td>
+                            <td style="background:rgba(0,0,0,0.02);"><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px; font-weight:800; color:var(--accent-red);"></td>
+                        </tr>
+                        <tr>
+                            <td style="background:rgba(0,0,0,0.05); padding:12px; font-weight:800;">UNIQUE CAP.</td>
+                            <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;"></td>
+                            <td><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px;"></td>
+                            <td style="background:rgba(0,0,0,0.02);"><input type="text" class="text-body" style="width:100%; background:none; border:none; padding:12px; font-weight:800; color:var(--accent-red);"></td>
+                        </tr>
+                    </tbody>
+                 </table>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
         </section>
 
         <!-- Generate Section Template -->
@@ -133,18 +330,216 @@
         </section>
 
         <!-- Result Section Template -->
+        <!-- Slide 9: 07 — Progress & Findings -->
+        <section class="section-view" id="tpl-s9">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">09 / 15</div></div>
+            </div>
+            <h2 class="title-large" style="margin-bottom:40px;">WHAT WE'VE DONE<br>— WHAT WE'VE LEARNED</h2>
+            <div class="grid-3" style="text-align:center; margin-bottom:40px;">
+                <div class="data-card">
+                    <input type="text" class="num-tabular" style="font-size:3rem; background:none; border:none; width:100%; text-align:center; color:var(--accent-red);" placeholder="0">
+                    <span class="label-micro">CUSTOMERS INTERVIEWED</span>
+                </div>
+                <div class="data-card">
+                    <input type="text" class="num-tabular" style="font-size:3rem; background:none; border:none; width:100%; text-align:center; color:var(--accent-red);" placeholder="0">
+                    <span class="label-micro">PROTOTYPES</span>
+                </div>
+                <div class="data-card">
+                    <input type="text" class="num-tabular" style="font-size:3rem; background:none; border:none; width:100%; text-align:center; color:var(--accent-red);" placeholder="0%">
+                    <span class="label-micro">VALIDATION RATE</span>
+                </div>
+            </div>
+            <div class="data-card" style="flex:1;">
+                <span class="label-micro">KEY FINDINGS</span>
+                <textarea class="text-body" style="width:100%; flex:1; background:none; border:none; margin-top:20px; outline:none;" placeholder="1. Research confirmation...&#10;2. Surprising insights...&#10;3. Demand justification..."></textarea>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 10: 08 — Team -->
+        <section class="section-view" id="tpl-s10">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">10 / 15</div></div>
+            </div>
+            <h2 class="title-large" style="margin-bottom:40px;">WHO WILL MAKE<br>THIS HAPPEN?</h2>
+            <div class="grid-3" style="flex:1;">
+                <div class="data-card" style="border-top:4px solid var(--fg-black);">
+                    <span class="label-micro" style="color:var(--accent-red);">TEAM LEAD</span>
+                    <input type="text" class="text-body" style="width:100%; background:none; border:none; font-weight:800; margin:16px 0;" placeholder="FULL NAME">
+                    <textarea class="text-body" style="width:100%; height:80px; background:none; border:none; outline:none;" placeholder="Unique skill / credibility..."></textarea>
+                </div>
+                <div class="data-card" style="border-top:4px solid var(--fg-black);">
+                    <span class="label-micro" style="color:var(--accent-red);">SPECIALIST</span>
+                    <input type="text" class="text-body" style="width:100%; background:none; border:none; font-weight:800; margin:16px 0;" placeholder="FULL NAME">
+                    <textarea class="text-body" style="width:100%; height:80px; background:none; border:none; outline:none;" placeholder="Unique skill / credibility..."></textarea>
+                </div>
+                <div class="data-card" style="border-top:4px solid var(--fg-black);">
+                    <span class="label-micro" style="color:var(--accent-red);">ADVISOR / PARTNER</span>
+                    <input type="text" class="text-body" style="width:100%; background:none; border:none; font-weight:800; margin:16px 0;" placeholder="FULL NAME">
+                    <textarea class="text-body" style="width:100%; height:80px; background:none; border:none; outline:none;" placeholder="Unique skill / credibility..."></textarea>
+                </div>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 11: 09 — Resources -->
+        <section class="section-view" id="tpl-s11">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">11 / 15</div></div>
+            </div>
+            <h2 class="title-large" style="margin-bottom:40px;">WHAT WE HAVE<br>— WHAT WE NEED</h2>
+            <div class="grid-2" style="flex:1;">
+                <div class="data-card" style="border:2px solid var(--fg-black);">
+                    <span class="label-micro" style="font-weight:800;">HAVE</span>
+                    <textarea class="text-body" style="width:100%; flex:1; background:none; border:none; margin-top:20px; outline:none;" placeholder="Budget allocated, committed members, infrastructure, secured IP..."></textarea>
+                </div>
+                <div class="data-card" style="border:2px dashed var(--accent-red);">
+                    <span class="label-micro" style="color:var(--accent-red); font-weight:800;">NEED</span>
+                    <textarea class="text-body" style="width:100%; flex:1; background:none; border:none; margin-top:20px; outline:none;" placeholder="Budget gaps, roles to hire, tools/platforms, regulatory approvals..."></textarea>
+                </div>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 12: 10 — Risk Assessment -->
+        <section class="section-view" id="tpl-s12">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">12 / 15</div></div>
+            </div>
+            <h2 class="title-large" style="margin-bottom:40px;">RISKS — AND<br>HOW WE ADDRESS THEM</h2>
+            <div style="flex:1; border:var(--border-thin);">
+                 <table style="width:100%; border-collapse: collapse; text-align:left;">
+                    <thead style="background:var(--fg-black); color:var(--bg-grey);">
+                        <tr>
+                            <th style="padding:12px; font-size:10px;">CATEGORY</th>
+                            <th style="padding:12px; font-size:10px;">LEVEL</th>
+                            <th style="padding:12px; font-size:10px;">DESCRIPTION</th>
+                            <th style="padding:12px; font-size:10px; color:var(--accent-yellow);">MITIGATION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:var(--border-thin);">
+                            <td class="label-micro" style="padding:12px;">DELIVERY</td>
+                            <td><input type="text" style="width:100%; border:none; background:none;" placeholder="MED"></td>
+                            <td><input type="text" style="width:100%; border:none; background:none;" placeholder="Short desc..."></td>
+                            <td style="background:rgba(0,0,0,0.02);"><input type="text" style="width:100%; border:none; background:none;" placeholder="Strategy..."></td>
+                        </tr>
+                        <tr style="border-bottom:var(--border-thin);">
+                            <td class="label-micro" style="padding:12px;">OPERATIONAL</td>
+                            <td><input type="text" style="width:100%; border:none; background:none;" placeholder="LOW"></td>
+                            <td><input type="text" style="width:100%; border:none; background:none;" placeholder="Short desc..."></td>
+                            <td style="background:rgba(0,0,0,0.02);"><input type="text" style="width:100%; border:none; background:none;" placeholder="Strategy..."></td>
+                        </tr>
+                        <tr style="border-bottom:var(--border-thin);">
+                            <td class="label-micro" style="padding:12px;">MARKET</td>
+                            <td><input type="text" style="width:100%; border:none; background:none;" placeholder="HIGH"></td>
+                            <td><input type="text" style="width:100%; border:none; background:none;" placeholder="Short desc..."></td>
+                            <td style="background:rgba(0,0,0,0.02);"><input type="text" style="width:100%; border:none; background:none;" placeholder="Strategy..."></td>
+                        </tr>
+                        <tr>
+                            <td class="label-micro" style="padding:12px;">DEPENDENCY</td>
+                            <td><input type="text" style="width:100%; border:none; background:none;" placeholder="MED"></td>
+                            <td><input type="text" style="width:100%; border:none; background:none;" placeholder="Short desc..."></td>
+                            <td style="background:rgba(0,0,0,0.02);"><input type="text" style="width:100%; border:none; background:none;" placeholder="Strategy..."></td>
+                        </tr>
+                    </tbody>
+                 </table>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 13: 11 — Market Potential -->
+        <section class="section-view" id="tpl-s13">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">13 / 15</div></div>
+            </div>
+            <h2 class="title-large" style="margin-bottom:40px;">THE OPPORTUNITY<br>SIZE</h2>
+            <div class="grid-3" style="flex:1;">
+                <div class="data-card" style="background:#0c0c0c; color:#fff;">
+                    <span class="label-micro" style="color:var(--accent-red);">TAM</span>
+                    <input type="text" class="num-tabular" style="font-size:3rem; background:none; border:none; color:#fff; width:100%; margin-top:20px;" placeholder="$0B">
+                    <p class="label-micro" style="opacity:0.5; margin-top:12px;">TOTAL ADDRESSABLE MARKET</p>
+                    <textarea class="text-body" style="background:none; border:none; color:#fff; font-size:10px; width:100%; margin-top:24px; resize:none;" placeholder="Source: e.g. Statista 2026"></textarea>
+                </div>
+                <div class="data-card">
+                    <span class="label-micro" style="color:var(--accent-red);">SAM</span>
+                    <input type="text" class="num-tabular" style="font-size:3rem; background:none; border:none; width:100%; margin-top:20px;" placeholder="$0M">
+                    <p class="label-micro" style="opacity:0.5; margin-top:12px;">SERVICEABLE ADDRESSABLE MARKET</p>
+                </div>
+                <div class="data-card">
+                    <span class="label-micro" style="color:var(--accent-red);">SOM</span>
+                    <input type="text" class="num-tabular" style="font-size:3rem; background:none; border:none; width:100%; margin-top:20px;" placeholder="$0M">
+                    <p class="label-micro" style="opacity:0.5; margin-top:12px;">SERVICEABLE OBTAINABLE MARKET</p>
+                </div>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 14: 12 — Business Model -->
+        <section class="section-view" id="tpl-s14">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">14 / 15</div></div>
+            </div>
+            <h2 class="title-large" style="margin-bottom:40px;">HOW WE MAKE<br>MONEY</h2>
+            <div class="grid-2" style="flex:1;">
+                <div class="data-card">
+                    <span class="label-micro">PRICING MODEL</span>
+                    <textarea class="text-body" style="width:100%; height:80px; background:none; border:none; margin-top:12px; outline:none;" placeholder="SaaS vs Usage..."></textarea>
+                    
+                    <span class="label-micro" style="margin-top:24px; display:block;">SALES MODEL</span>
+                    <textarea class="text-body" style="width:100%; height:80px; background:none; border:none; margin-top:12px; outline:none;" placeholder="Direct / Channel..."></textarea>
+                </div>
+                <div class="data-card" style="border-left:4px solid var(--fg-black);">
+                    <span class="label-micro">UNIT ECONOMICS</span>
+                    <textarea class="text-body" style="width:100%; height:80px; background:none; border:none; margin-top:12px; outline:none;" placeholder="CAC / Payback..."></textarea>
+
+                    <span class="label-micro" style="margin-top:24px; display:block;">3-YEAR FORECAST</span>
+                    <textarea class="text-body" style="width:100%; height:80px; background:none; border:none; margin-top:12px; outline:none;" placeholder="Revenue + Key assumptions..."></textarea>
+                </div>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next">Next</button></div>
+        </section>
+
+        <!-- Slide 15: Closing -->
+        <section class="section-view" id="tpl-s15">
+            <div class="section-meta">
+                <div><span class="label-micro">Slide</span><div class="num-tabular" style="font-size: 1.5rem;">15 / 15</div></div>
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+                <h1 class="title-huge">THANK YOU.</h1>
+                <p class="title-large" style="margin-top:24px; letter-spacing:0.2em;">NOW, LET'S TALK.</p>
+                <div style="margin-top:80px; border-top:1px solid #000; padding:24px 40px;">
+                    <span class="label-micro">Credits</span>
+                    <p class="text-body">Template by Sinaida (@sin.ai.da)</p>
+                </div>
+            </div>
+            <div class="nav-controls"><button class="nav-btn-prev">Back</button><button class="nav-btn-next" id="final-btn" style="background:var(--accent-red);">Finalize & Export →</button></div>
+        </section>
+
+        <!-- Final Result Template -->
         <section class="section-view" id="tpl-result">
             <div class="section-meta">
-                <div><span class="label-micro">Status</span><div class="text-body" style="text-transform: uppercase;">Output Ready</div></div>
+                <div><span class="label-micro">Output</span><div class="text-body">SYSTEM_GENERATED_DECK</div></div>
             </div>
-            <h2 class="title-large">FRAMEWORK<br>COMPLETE</h2>
-            <p class="text-body" style="margin-top:32px; max-width:600px;">Your structured narrative has been compiled into a professional presentation framework.</p>
+            <h2 class="title-large">METHODOLOGY<br>COMPLETE</h2>
             
-            <div id="slide-preview-list" style="margin-top:64px; border-top:var(--border-thin);"></div>
+            <div class="grid-2" style="margin-top:40px; flex:1; overflow-y:auto; border:var(--border-thin); background:#fff;">
+                <div style="padding:40px; border-right:var(--border-thin);">
+                    <span class="label-micro" style="color:var(--accent-red);">SUGGESTED LLM PROMPTS</span>
+                    <div id="prompts-list" style="margin-top:24px; display:flex; flex-direction:column; gap:20px;">
+                        <!-- Prompts will be injected here -->
+                    </div>
+                </div>
+                <div style="padding:40px;">
+                    <span class="label-micro">DIVE SUMMARY</span>
+                    <div id="slide-preview-list" style="margin-top:24px;"></div>
+                </div>
+            </div>
 
-            <div style="margin-top:64px; display:flex; gap:20px;">
-                <button id="download-btn" style="flex:1; height:80px; background:#000; color:#fff; border:none; font-family:inherit; font-size:1.5rem; font-weight:bold; letter-spacing:0.1em; text-transform:uppercase;">Download PPTX</button>
-                <button id="restart-btn" style="flex:0.5; height:80px; background:transparent; border:var(--border-thin); font-family:inherit; font-weight:bold; letter-spacing:0.1em; text-transform:uppercase;">New Project</button>
+            <div style="margin-top:40px; display:flex; gap:20px;">
+                <button id="download-btn" style="flex:1; height:80px; background:#000; color:#fff; border:none; font-family:inherit; font-weight:800; text-transform:uppercase; font-size:1.2rem; letter-spacing:0.1em;">Download PPTX Framework</button>
+                <button id="restart-btn" style="flex:0.4; height:80px; background:transparent; border:var(--border-thin); font-family:inherit; font-weight:bold; text-transform:uppercase;">New Concept</button>
             </div>
         </section>
     </div>
