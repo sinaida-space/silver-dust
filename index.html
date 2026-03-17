@@ -53,12 +53,40 @@
                 <div id="section-container"></div>
             </main>
         </div>
+
+        <footer class="app-footer">
+            <div class="footer-module">
+                <span class="label-micro">&copy; 2026 SINAIDA SPACE</span>
+            </div>
+            <div class="footer-module" style="flex:1; text-align:center;">
+                <span class="label-micro" style="opacity:0.5;">INDUSTRIAL_PITCH_FRAMEWORK // SYSTEM_V1</span>
+            </div>
+            <div class="footer-module">
+                <a href="#" id="privacy-trigger" class="label-micro" style="text-decoration:none; color:inherit; border:var(--border-thin); padding:4px 8px; transition: all 0.2s;">PRIVACY // GDPR</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div id="privacy-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 24px;">
+                <h2 class="label-micro" style="font-size:1rem; color:var(--accent-red);">PRIVACY POLICY // GDPR COMPLIANCE</h2>
+                <button id="close-privacy" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+            </div>
+            <div class="text-body" style="line-height:1.6;">
+                <p style="margin-bottom:16px;"><strong>DATA STORAGE:</strong> This application operates entirely within your browser's local sandbox (SessionStorage). <strong>No data is sent to any server, database, or third-party service.</strong></p>
+                <p style="margin-bottom:16px;"><strong>ANALYTICS:</strong> We do not use cookies, trackers, or any analytics scripts that could identify you or your IP address.</p>
+                <p style="margin-bottom:16px;"><strong>RECOVERABILITY:</strong> Since no data is stored on our servers, once you clear your session or start a "New Concept", your data is permanently deleted and cannot be recovered by us.</p>
+                <p style="border-top:var(--border-thin); padding-top:16px; margin-top:24px; font-style:italic; opacity:0.6;">By using this tool, you acknowledge that your project details remain strictly on your local machine.</p>
+            </div>
+        </div>
     </div>
 
     <!-- UI Templates (Hidden) -->
     <div id="templates" style="display:none;">
-        <!-- Title Section Template -->
-        <section class="section-view" id="tpl-00">
+        <!-- Hero Section Template -->
+        <section class="section-view" id="tpl-hero">
             <div class="gradient-burst" style="background: radial-gradient(circle at 70% 30%, rgba(212, 65, 34, 0.15) 0%, transparent 70%);"></div>
             <div class="section-meta">
                 <div>

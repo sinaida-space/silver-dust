@@ -221,5 +221,18 @@ function downloadPPTX() {
 }
 
 // ── INIT ──────────────────────────────────────────────────────────
+function initPrivacy() {
+    const modal = document.getElementById('privacy-modal');
+    const trigger = document.getElementById('privacy-trigger');
+    const close = document.getElementById('close-privacy');
+
+    if (trigger && modal && close) {
+        trigger.onclick = (e) => { e.preventDefault(); modal.classList.add('active'); };
+        close.onclick = () => modal.classList.remove('active');
+        window.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
+    }
+}
+
 initNav();
+initPrivacy();
 renderHero();
