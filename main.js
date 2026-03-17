@@ -1,67 +1,125 @@
-// ── STATE ─────────────────────────────────────────────────────────
+// ── STATE MANAGEMENT ──────────────────────────────────────────────
 const S = {
-    ans: JSON.parse(sessionStorage.getItem('sd_v2') || '{}'),
+    ans: JSON.parse(localStorage.getItem('silver_dust_v2') || '{}'),
     currentIdx: 0,
-    save() { sessionStorage.setItem('sd_v2', JSON.stringify(this.ans)); }
+    save() { 
+        localStorage.setItem('silver_dust_v2', JSON.stringify(this.ans)); 
+        this.updateProgress();
+    },
+    updateProgress() {
+        const total = 15;
+        const filled = Object.keys(this.ans).length;
+        const progress = Math.min((filled / 40) * 100, 100); // Rough estimate based on ~40 potential fields
+        const bar = document.getElementById('progress-fill');
+        if (bar) bar.style.width = `${progress}%`;
+    }
 };
 
-// ── SLIDE DEFINITIONS ─────────────────────────────────────────────
+// ── SLIDE CONFIGURATION ───────────────────────────────────────────
 const SLIDES = [
-    { id: 'hero',  num: '00', title: 'Moment Before' },
-    { id: 's1',    num: '01', title: 'Project Title' },
-    { id: 's2',    num: '02', title: 'Meta' },
-    { id: 's3',    num: '03', title: 'Problem' },
-    { id: 's4',    num: '04', title: 'Solution' },
-    { id: 's5',    num: '05', title: 'Target Clients' },
-    { id: 's6',    num: '06', title: 'Goal & CTQs' },
-    { id: 's7',    num: '07', title: 'Scope' },
-    { id: 's8',    num: '08', title: 'Competition' },
-    { id: 's9',    num: '09', title: 'Progress' },
-    { id: 's10',   num: '10', title: 'Team' },
-    { id: 's11',   num: '11', title: 'Resources' },
-    { id: 's12',   num: '12', title: 'Risks' },
-    { id: 's13',   num: '13', title: 'Market' },
-    { id: 's14',   num: '14', title: 'Business Model' },
-    { id: 's15',   num: '15', title: 'Closing' },
-    { id: 'result', num: 'Final', title: 'Result' }
+    { id: 'hero', num: '00', title: 'Moment Before' },
+    { id: 's1', num: '01', title: 'Project Title', hint: 'Clearly define the identity of the initiative.', fields: [
+        { label: 'PROJECT_TITLE', key: 'title', type: 'text', placeholder: 'e.g. PROJECT_GENESIS', full: true },
+        { label: 'PRESENTER_IDENT', key: 'presenter', type: 'text', placeholder: 'NAME / DEPT' }
+    ]},
+    { id: 's2', num: '02', title: 'Meta Protocol', hint: 'The rules of engagement for this framework.', fields: [
+        { label: 'MODULARITY_STATUS', key: 'meta_modularity', type: 'textarea', placeholder: 'Define how this structure adapts to your specific needs...' },
+        { label: 'EVIDENCE_STANDARD', key: 'meta_evidence', type: 'textarea', placeholder: 'Define what counts as validated data for this project...' }
+    ]},
+    { id: 's3', num: '03', title: 'Problem Logic', hint: 'Focus on the underlying friction and the cost of the status quo.', fields: [
+        { label: 'CORE_FRICTION', key: 'problem_core', type: 'textarea', placeholder: 'What is fundamentally broken?' },
+        { label: 'QUANTIFIABLE_EVIDENCE', key: 'problem_evidence', type: 'textarea', placeholder: 'Hard numbers, quotes, or loss metrics...' }
+    ]},
+    { id: 's4', num: '04', title: 'Solution Path', hint: 'Transition from current state to the proposed future state.', fields: [
+        { label: 'CURRENT_STATE_DYNAMICS', key: 'solution_current', type: 'textarea', placeholder: 'Manual work, delays, risks...' },
+        { label: 'PROPOSED_TRANSFORMATION', key: 'solution_future', type: 'textarea', placeholder: 'Automated, seamless, unlocked...' }
+    ]},
+    { id: 's5', num: '05', title: 'Target Vectors', hint: 'Identify the specific segments being addressed.', fields: [
+        { label: 'SEGMENT_PRIMARY', key: 'target_primary', type: 'text', placeholder: 'Industry / Role' },
+        { label: 'IMPACT_DESCRIPTION', key: 'target_impact', type: 'textarea', placeholder: 'How exactly does this help them?' }
+    ]},
+    { id: 's6', num: '06', title: 'Success Metrics', hint: 'What does "Done" look like? Define your CTQs.', fields: [
+        { label: 'NORTH_STAR_GOAL', key: 'goal_main', type: 'text', placeholder: 'One sentence: Achievement, Timeline, Measure.', full: true },
+        { label: 'CTQ_01_RELIABILITY', key: 'goal_ctq1', type: 'text', placeholder: 'Metric + Target' },
+        { label: 'CTQ_02_EFFICIENCY', key: 'goal_ctq2', type: 'text', placeholder: 'Metric + Target' }
+    ]},
+    { id: 's7', num: '07', title: 'Scope Boundary', hint: 'Establish clear guardrails to prevent scope creep.', fields: [
+        { label: 'CRITICAL_INCLUSIONS', key: 'scope_in', type: 'textarea', placeholder: 'Deliverables included in Phase 1...' },
+        { label: 'EXPLICIT_EXCLUSIONS', key: 'scope_out', type: 'textarea', placeholder: 'What we are NOT doing right now...' }
+    ]},
+    { id: 's8', num: '08', title: 'Unique Leverage', hint: 'Why this approach? What is the differentiator?', fields: [
+        { label: 'COMPETITIVE_GAP', key: 'comp_gap', type: 'textarea', placeholder: 'Where do existing solutions fail?' },
+        { label: 'OUR_UNFAIR_ADVANTAGE', key: 'comp_edge', type: 'textarea', placeholder: 'Proprietary tech, process, or speed...' }
+    ]},
+    { id: 's9', num: '09', title: 'Validation Log', hint: 'What have we learned so far? Evidence of traction.', fields: [
+        { label: 'INTERVIEW_COUNT', key: 'val_interviews', type: 'text', placeholder: 'e.g. 15 Users' },
+        { label: 'KEY_INSIGHT_REVEALED', key: 'val_insight', type: 'textarea', placeholder: 'The most surprising discovery...' }
+    ]},
+    { id: 's10', num: '10', title: 'Execution Team', hint: 'The human capital behind the initiative.', fields: [
+        { label: 'INITIATIVE_LEAD', key: 'team_lead', type: 'text', placeholder: 'Name + Track Record' },
+        { label: 'CORE_CAPABILITIES', key: 'team_skills', type: 'textarea', placeholder: 'Why is this the right team?' }
+    ]},
+    { id: 's11', num: '11', title: 'Resource Matrix', hint: 'The capital and tools required to launch.', fields: [
+        { label: 'ASSETS_SECURED', key: 'res_have', type: 'textarea', placeholder: 'Budget, IP, Infrastructure...' },
+        { label: 'CRITICAL_GAPS', key: 'res_need', type: 'textarea', placeholder: 'Hiring, funding, partnership needs...' }
+    ]},
+    { id: 's12', num: '12', title: 'Risk Protocol', hint: 'Anticipate failure and plan mitigation.', fields: [
+        { label: 'HIGH_IMPACT_RISK', key: 'risk_main', type: 'text', placeholder: 'Description of threat' },
+        { label: 'MITIGATION_STRATEGY', key: 'risk_fix', type: 'textarea', placeholder: 'How we eliminate or reduce it...' }
+    ]},
+    { id: 's13', num: '13', title: 'Market Scale', hint: 'The magnitude of the opportunity (TAM/SAM/SOM).', fields: [
+        { label: 'MARKET_MAGNITUDE', key: 'market_tam', type: 'text', placeholder: 'e.g. $10B Global Market' },
+        { label: 'OBTAINABLE_SHARE', key: 'market_som', type: 'text', placeholder: 'e.g. $5M Year 1' }
+    ]},
+    { id: 's14', num: '14', title: 'Economic Logic', hint: 'The sustainability and monetization strategy.', fields: [
+        { label: 'REVENUE_ARCHITECTURE', key: 'biz_model', type: 'textarea', placeholder: 'SaaS, Transactional, etc.' },
+        { label: 'UNIT_ECONOMICS', key: 'biz_units', type: 'text', placeholder: 'CAC vs LTV logic' }
+    ]},
+    { id: 's15', num: '15', title: 'Closing Signal', hint: 'Final validation and call to action.', fields: [
+        { label: 'CALL_TO_BOARDROOM', key: 'close_cta', type: 'text', placeholder: 'Final closing punchline' },
+        { label: 'NEXT_MILESTONE', key: 'close_next', type: 'text', placeholder: 'Immediate next step' }
+    ]},
+    { id: 'result', num: 'FINAL', title: 'Output Generation' }
 ];
 
-// ── NAVIGATION ────────────────────────────────────────────────────
+// ── NAVIGATION LOGIC ──────────────────────────────────────────────
 function initNav() {
     const nav = document.getElementById('nav-list');
+    if (!nav) return;
     nav.innerHTML = '';
-    SLIDES.forEach(s => {
+    
+    SLIDES.forEach((s, i) => {
         const li = document.createElement('li');
-        li.className = `nav-item ${s.id === 'hero' ? 'active' : ''}`;
+        li.className = 'nav-item';
         li.id = `nav-${s.id}`;
         li.innerHTML = `
-            <div class="nav-num num-tabular">${s.num}</div>
-            <div class="nav-title">${s.title}</div>
+            <span class="nav-num num-tabular">${s.num}</span>
+            <span class="nav-label">${s.title}</span>
         `;
-        li.onclick = () => jumpTo(s.id);
+        li.onclick = () => jumpTo(i);
         nav.appendChild(li);
     });
 }
 
-function jumpTo(id) {
-    const idx = SLIDES.findIndex(s => s.id === id);
-    if (idx === -1) return;
-    
+function jumpTo(idx) {
+    if (idx < 0 || idx >= SLIDES.length) return;
+    S.currentIdx = idx;
+    const slide = SLIDES[idx];
+
     // Update Nav UI
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-    document.getElementById(`nav-${id}`).classList.add('active');
-    
-    // Update Progress
-    const progress = (idx / (SLIDES.length - 1)) * 100;
-    document.getElementById('progress-fill').style.width = progress + '%';
+    const activeNav = document.getElementById(`nav-${slide.id}`);
+    if (activeNav) activeNav.classList.add('active');
 
-    // Render Body
-    if (id === 'hero') renderHero();
-    else if (id === 'result') renderResult();
-    else renderSlide(id);
+    // Render Logic
+    if (slide.id === 'hero') renderHero();
+    else if (slide.id === 'result') renderResult();
+    else renderStep(idx);
+
+    S.updateProgress();
 }
 
-// ── RENDERING ─────────────────────────────────────────────────────
+// ── RENDERERS ─────────────────────────────────────────────────────
 const container = document.getElementById('section-container');
 const templates = document.getElementById('templates');
 
@@ -69,103 +127,102 @@ function renderHero() {
     container.innerHTML = '';
     const clone = templates.querySelector('#tpl-hero').cloneNode(true);
     container.appendChild(clone);
-    clone.classList.add('active');
 
-    const input = clone.querySelector('#hero-concept');
-    input.value = S.ans['big_idea'] || '';
-    input.oninput = () => { S.ans['big_idea'] = input.value; S.save(); };
+    const input = clone.querySelector('#hero-input');
+    input.value = S.ans['raw_intent'] || '';
+    input.oninput = () => { S.ans['raw_intent'] = input.value; S.save(); };
 
     clone.querySelector('#start-btn').onclick = () => {
         if (!input.value.trim()) {
-            input.style.borderColor = 'var(--accent-red)';
+            input.parentElement.style.borderColor = 'var(--accent-red)';
             return;
         }
-        jumpTo('s1');
+        jumpTo(1);
     };
 }
 
-function renderSlide(id) {
+function renderStep(idx) {
+    const slide = SLIDES[idx];
     container.innerHTML = '';
-    const clone = templates.querySelector(`#tpl-${id}`).cloneNode(true);
+    const clone = templates.querySelector('#tpl-step').cloneNode(true);
     container.appendChild(clone);
-    clone.classList.add('active');
 
-    // Load/Save Logic for Inputs & Textareas
-    const inputs = clone.querySelectorAll('input, textarea');
-    inputs.forEach((inp, i) => {
-        const key = `${id}_${i}`;
-        // Special case for Slide 1 Title
-        if (id === 's1' && inp.id === 's1-title') {
-             inp.textContent = S.ans[key] || 'PROJECT TITLE';
-             inp.oninput = () => { S.ans[key] = inp.textContent; S.save(); };
-        } else {
-             inp.value = S.ans[key] || '';
-             inp.oninput = () => { S.ans[key] = inp.value; S.save(); };
-        }
+    // Meta Data Inversion
+    clone.querySelector('#step-num-label').textContent = `STEP_${slide.num}`;
+    clone.querySelector('#panel-title').textContent = slide.title.toUpperCase();
+    clone.querySelector('#prompt-hint').textContent = slide.hint;
+
+    const body = clone.querySelector('#panel-body');
+    const grid = document.createElement('div');
+    grid.className = 'grid-stack';
+
+    slide.fields.forEach(f => {
+        const group = document.createElement('div');
+        group.className = 'field-group';
+        if (f.full) group.style.gridColumn = '1 / -1';
+        
+        group.innerHTML = `
+            <label class="label-micro">${f.label}</label>
+            ${f.type === 'textarea' 
+                ? `<textarea id="${f.key}" class="input-premium" placeholder="${f.placeholder}"></textarea>`
+                : `<input type="text" id="${f.key}" class="input-premium" placeholder="${f.placeholder}">`
+            }
+        `;
+        grid.appendChild(group);
+
+        // Bind Data
+        const input = group.querySelector('.input-premium');
+        input.value = S.ans[f.key] || '';
+        input.oninput = () => { S.ans[f.key] = input.value; S.save(); };
     });
+    body.appendChild(grid);
 
-    // Special logic for contenteditable (Slide 1 title)
-    const titleEl = clone.querySelector('#s1-title');
-    if (titleEl) {
-        titleEl.textContent = S.ans['s1_title'] || 'PROJECT TITLE';
-        titleEl.oninput = () => { S.ans['s1_title'] = titleEl.textContent; S.save(); };
-    }
-
-    // Dynamic Date on Slide 1
-    const dateEl = clone.querySelector('#s1-date');
-    if (dateEl) {
-        const d = new Date();
-        dateEl.textContent = `${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')}.${d.getFullYear()}`;
-    }
-
-    // Navigation Buttons
-    const currIdx = SLIDES.findIndex(s => s.id === id);
-    clone.querySelector('.nav-btn-prev').onclick = () => jumpTo(SLIDES[currIdx-1].id);
-    clone.querySelector('.nav-btn-next').onclick = () => jumpTo(SLIDES[currIdx+1].id);
+    // Navigation
+    clone.querySelector('.nav-btn-prev').onclick = () => jumpTo(idx - 1);
+    clone.querySelector('.nav-btn-next').onclick = () => jumpTo(idx + 1);
 }
 
 function renderResult() {
     container.innerHTML = '';
     const clone = templates.querySelector('#tpl-result').cloneNode(true);
     container.appendChild(clone);
-    clone.classList.add('active');
 
-    // 1. Generate Prompt Section
+    // Prompt Generation Logic
     const promptList = clone.querySelector('#prompts-list');
-    const prompts = [
-        { label: "Executive Narrative", prompt: `Write a high-stakes executive summary for my project: "${S.ans['big_idea']}". Use a professional, persuasive tone suitable for board members.` },
-        { label: "Market Sizing Logic", prompt: `Analyze the market potential for "${S.ans['big_idea']}". Provide realistic TAM/SAM/SOM estimates with justification based on recent industry trends.` },
-        { label: "Competitive Edge", prompt: `Identify 3 key areas where "${S.ans['big_idea']}" would outperform existing solutions in terms of speed, cost, and user experience.` }
+    const strategies = [
+        { label: "EXECUTIVE_NARRATIVE", prompt: `As a high-level consultant, refine this project vision: "${S.ans['raw_intent']}". Structure it as a 3-act narrative focusing on ${S.ans['problem_core'] || 'current pain points'} and the proposed transformation to ${S.ans['solution_future'] || 'the destination'}.` },
+        { label: "MARKET_LOGIC", prompt: `Using the target segment "${S.ans['target_primary'] || 'unknown'}", generate a market entry strategy for "${S.ans['title'] || 'Project Genesis'}". Focus on quantifying the ${S.ans['market_tam'] || 'opportunity'} and mitigate the risk of ${S.ans['risk_main'] || 'standard failures'}.` },
+        { label: "EXECUTION_ROADMAP", prompt: `Create a 90-day execution roadmap for "${S.ans['title']}". Starting from ${S.ans['team_lead']}'s core expertise, define the sequence of milestones to achieve ${S.ans['goal_main']}.` }
     ];
 
-    prompts.forEach(p => {
+    strategies.forEach(s => {
         const div = document.createElement('div');
-        div.className = 'data-card';
-        div.style.padding = '20px';
+        div.className = 'prompt-card';
         div.innerHTML = `
-            <span class="label-micro" style="color:var(--accent-red);">${p.label}</span>
-            <p class="text-body" style="font-size:12px; margin-top:12px; font-weight:600; line-height:1.4;">"${p.prompt}"</p>
-            <button class="label-micro" style="margin-top:16px; background:none; border:none; text-decoration:underline; cursor:pointer;" onclick="copyText('${p.prompt.replace(/'/g, "\\'")}', this)">Copy Prompt →</button>
+            <span class="label-micro text-accent">${s.label}</span>
+            <p class="text-body" style="margin: 12px 0; font-weight:600; font-size: 0.9rem;">"${s.prompt}"</p>
+            <button class="label-micro" style="background:none; border:none; text-decoration:underline; cursor:pointer;" onclick="copyText('${s.prompt.replace(/'/g, "\\'")}', this)">[COPY_PROMPT]</button>
         `;
         promptList.appendChild(div);
     });
 
-    // 2. Summary List
-    const list = clone.querySelector('#slide-preview-list');
+    // Snapshot Preview
+    const preview = clone.querySelector('#slide-preview-list');
     SLIDES.slice(1, 16).forEach(s => {
-        const row = document.createElement('div');
-        row.style.cssText = 'padding:16px 0; border-bottom:var(--border-thin); display:flex; gap:20px; align-items:center;';
-        row.innerHTML = `
-            <div class="num-tabular" style="color:var(--accent-red); font-weight:800;">${s.num}</div>
-            <div class="label-micro" style="opacity:0.6;">${s.title}</div>
-            <div style="flex:1; text-align:right;">✓ READY</div>
+        const item = document.createElement('div');
+        item.style.cssText = 'padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center;';
+        const isReady = s.fields.some(f => S.ans[f.key]) ? '✓ READY' : '░ EMPTY';
+        item.innerHTML = `
+            <span class="num-tabular" style="font-weight:800;">${s.num}</span>
+            <span class="label-micro" style="opacity:0.5;">${s.title}</span>
+            <span class="label-micro" style="font-size:0.5rem;">${isReady}</span>
         `;
-        list.appendChild(row);
+        preview.appendChild(item);
     });
 
     clone.querySelector('#download-btn').onclick = downloadPPTX;
     clone.querySelector('#restart-btn').onclick = () => {
-        if (confirm('Clear session and start over?')) {
+        if (confirm('TERMINATE_SESSION // All local buffers will be cleared?')) {
             S.ans = {};
             S.save();
             location.reload();
@@ -177,62 +234,78 @@ function renderResult() {
 function copyText(text, btn) {
     navigator.clipboard.writeText(text).then(() => {
         const old = btn.textContent;
-        btn.textContent = '✓ COPIED';
+        btn.textContent = '✓ COPIED_TO_CLIPBOARD';
         setTimeout(() => btn.textContent = old, 1500);
     });
 }
 
-// ── PPTX GENERATION ───────────────────────────────────────────────
+function updateGlobalDate() {
+    const el = document.getElementById('current-date');
+    if (el) {
+        const d = new Date();
+        el.textContent = `${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')}.${d.getFullYear()}`;
+    }
+}
+
+// ── PPTX EXPORT ───────────────────────────────────────────────────
 function downloadPPTX() {
     const pres = new PptxGenJS();
     pres.layout = 'LAYOUT_WIDE';
+
+    // Master Definition
     pres.defineSlideMaster({
         title: 'SD_MASTER',
         background: { color: 'FFFFFF' },
         objects: [
             { line: { x: 0.5, y: 0.8, w: 12.3, h: 0, line: { color: '000000', width: 0.5 } } },
-            { text: { text: 'SILVER DUST // INTRO PLAN', options: { x: 0.5, y: 0.4, fontFace: 'Helvetica Neue', fontSize: 8, color: 'D44122', bold: true } } }
+            { text: { text: 'SILVER DUST // PROJECT_STRUCTURIZER', options: { x: 0.5, y: 0.4, fontFace: 'Helvetica Neue', fontSize: 8, color: 'D44122', bold: true } } }
         ]
     });
 
-    // Slide 1: Title
+    // 1. Title Slide
     let s1 = pres.addSlide({ masterName: 'SD_MASTER' });
-    s1.addText((S.ans['s1_title'] || 'PROJECT TITLE').toUpperCase(), { x: 0.5, y: 3.0, w: 12, fontFace: 'Helvetica Neue', fontSize: 54, bold: true });
+    s1.addText((S.ans['title'] || 'PROJECT_GENESIS').toUpperCase(), { x: 0.5, y: 3.0, w: 12, fontFace: 'Helvetica Neue', fontSize: 54, bold: true });
     s1.addText('A STRUCTURED FRAMEWORK FOR PRESENTING NEW PROJECTS', { x: 0.5, y: 4.2, w: 12, fontFace: 'Helvetica Neue', fontSize: 14, opacity: 0.6 });
+    s1.addText(`PRESENTER: ${S.ans['presenter'] || 'ID_NOT_CAPTURED'}`, { x: 0.5, y: 6.5, fontFace: 'Helvetica Neue', fontSize: 10, bold: true });
 
-    // Slide 2: Meta
-    let s2 = pres.addSlide({ masterName: 'SD_MASTER' });
-    s2.addText('HOW TO USE THIS TEMPLATE', { x: 0.5, y: 1.5, fontFace: 'Helvetica Neue', fontSize: 32, bold: true, color: 'D44122' });
-
-    // Core Content Slides (Simple mapping for now)
-    SLIDES.slice(3, 15).forEach(meta => {
-        let sc = pres.addSlide({ masterName: 'SD_MASTER' });
-        sc.addText(meta.num, { x: 0.5, y: 1.2, fontFace: 'Helvetica Neue', fontSize: 24, bold: true, color: 'D44122' });
-        sc.addText(meta.title.toUpperCase(), { x: 0.5, y: 1.8, fontFace: 'Helvetica Neue', fontSize: 40, bold: true });
+    // 2. Loop through all steps
+    SLIDES.slice(2, 16).forEach(conf => {
+        let slide = pres.addSlide({ masterName: 'SD_MASTER' });
+        slide.addText(conf.num, { x: 0.5, y: 1.2, fontFace: 'Helvetica Neue', fontSize: 24, bold: true, color: 'D44122' });
+        slide.addText(conf.title.toUpperCase(), { x: 0.5, y: 1.8, fontFace: 'Helvetica Neue', fontSize: 40, bold: true });
         
-        sc.addText('[DATA CAPTURED FROM APP INTERFACE]', { x: 0.5, y: 3.5, w: 12, fontFace: 'Helvetica Neue', fontSize: 18, italic: true });
+        let y = 3.2;
+        conf.fields.forEach(f => {
+            const val = S.ans[f.key] || `[NO_DATA_FOR_${f.label}]`;
+            slide.addText(f.label, { x: 0.5, y: y, fontFace: 'Helvetica Neue', fontSize: 10, bold: true, color: '666666' });
+            slide.addText(val, { x: 0.5, y: y + 0.3, w: 11, fontFace: 'Helvetica Neue', fontSize: 16 });
+            y += 1.2;
+        });
     });
 
-    // Slide 15: Closing
-    let s15 = pres.addSlide({ masterName: 'SD_MASTER' });
-    s15.addText('THANK YOU.', { x: 0.5, y: 3.0, w: 12, fontFace: 'Helvetica Neue', fontSize: 72, bold: true, align: 'center' });
-
-    pres.writeFile({ fileName: `Silver-Dust-Framework.pptx` });
+    pres.writeFile({ fileName: `Silver-Dust-Project-${S.ans['title'] || 'Genesis'}.pptx` });
 }
 
-// ── INIT ──────────────────────────────────────────────────────────
-function initPrivacy() {
+// ── INITIALIZATION ───────────────────────────────────────────────
+function initSystem() {
+    updateGlobalDate();
+    initNav();
+    
+    // Privacy
     const modal = document.getElementById('privacy-modal');
     const trigger = document.getElementById('privacy-trigger');
     const close = document.getElementById('close-privacy');
-
     if (trigger && modal && close) {
         trigger.onclick = (e) => { e.preventDefault(); modal.classList.add('active'); };
         close.onclick = () => modal.classList.remove('active');
-        window.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
     }
+
+    // Header Restart
+    document.getElementById('restart-btn-header').onclick = () => {
+        if (confirm('START_NEW_SESSION?')) { S.ans = {}; S.save(); jumpTo(0); }
+    };
+
+    jumpTo(0);
 }
 
-initNav();
-initPrivacy();
-renderHero();
+document.addEventListener('DOMContentLoaded', initSystem);
