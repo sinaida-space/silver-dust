@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Dust - Intro Plan Framework</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- PPTX Generation Library -->
+    <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-module">
+                <span class="label-micro">System</span>
+                <span class="text-body" style="font-weight:bold;">SILVER_DUST</span>
+            </div>
+            <div class="header-module">
+                <span class="label-micro">Version</span>
+                <span class="num-tabular" style="font-size: 1rem;">I/GA</span>
+            </div>
+            <div class="header-module" style="border-right: var(--border-thin);">
+                <span class="label-micro">Date Active</span>
+                <span class="num-tabular" style="font-size: 1rem;" id="current-date">--.--.----</span>
+            </div>
+            <div class="header-module">
+                <span class="label-micro">Status</span>
+                <span class="text-body" style="text-transform: uppercase;" id="app-status">Ready</span>
+            </div>
+        </header>
+
+        <div class="app-workspace">
+            <nav class="nav-sidebar">
+                <div class="nav-header">
+                    <span class="label-micro" style="display:block; margin-bottom: 4px;">Index</span>
+                    <div style="border-top: 1px solid black; width: 20px; margin-bottom: 4px;"></div>
+                    <span class="text-body">12 Section Framework</span>
+                </div>
+                <ul class="nav-list" id="nav-list"></ul>
+            </nav>
+
+            <main class="content-area">
+                <svg class="bg-squiggle" viewBox="0 0 1000 200" preserveAspectRatio="none">
+                    <path d="M0,100 Q50,150 100,100 T200,100 T300,50 T400,150 T500,80 T600,120 T700,50 T800,150 T900,90 T1000,100" fill="none" stroke="#0c0c0c" stroke-width="1"></path>
+                </svg>
+
+                <div id="section-container"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- UI Templates (Hidden) -->
+    <div id="templates" style="display:none;">
+        <!-- Title Section Template -->
+        <section class="section-view" id="tpl-00">
+            <div class="gradient-burst"></div>
+            <div class="section-meta">
+                <div>
+                    <span class="label-micro">Project Deck</span>
+                    <div class="num-tabular" style="font-size: 1.5rem;">00</div>
+                </div>
+            </div>
+            <div class="section-header" style="margin-top: 10vh;">
+                <h1 class="title-huge" id="display-title">THE<br>PROJECT<br>TITLE</h1>
+                <p class="title-large" style="margin-top: var(--space-md); font-size: 1.5rem; letter-spacing: 0; font-weight: 600;">
+                    ++ INTRO PLAN: A STRUCTURED FRAMEWORK FOR PRESENTING NEW PROJECTS
+                </p>
+            </div>
+            <div class="grid-2" style="margin-top: auto; border-top: var(--border-thin); padding-top: var(--space-md);">
+                <div>
+                    <span class="label-micro">Presenter</span>
+                    <p class="text-body" style="text-transform: uppercase; font-weight: bold;" id="display-presenter">--</p>
+                </div>
+                <div>
+                    <span class="label-micro">Classification</span>
+                    <p class="text-body">INTERNAL + CONFIDENTIAL</p>
+                </div>
+            </div>
+            <button class="btn-action" id="start-btn" style="margin-top:40px; width:280px; height:60px; background:#000; color:#fff; border:none; font-family:inherit; font-weight:bold; letter-spacing:0.1em; text-transform:uppercase;">Initialize Framework →</button>
+        </section>
+
+        <!-- Question Section Template -->
+        <section class="section-view" id="tpl-question">
+            <div class="section-meta">
+                <div><span class="label-micro">Section</span><div class="num-tabular" id="q-num" style="font-size: 1.5rem;">--</div></div>
+                <div><span class="label-micro">Topic</span><div class="text-body" id="q-slide" style="text-transform: uppercase;">--</div></div>
+            </div>
+            <div class="q-content">
+                <p class="label-micro" id="q-opener" style="margin-bottom:12px; opacity:0.6;">--</p>
+                <h2 class="title-large" id="q-title">--</h2>
+                <p class="text-body" id="q-guidance" style="margin-top:16px; max-width:600px; color:#555;">--</p>
+                
+                <div class="chips-grid" id="q-chips" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:32px;"></div>
+
+                <div class="input-area" style="margin-top:48px;">
+                    <textarea id="q-input" class="text-body" placeholder="Type your answer here..." style="width:100%; min-height:200px; background:transparent; border:var(--border-thin); padding:24px; font-family:inherit; color:inherit; resize:none; outline:none;"></textarea>
+                    <div style="display:flex; justify-content:space-between; margin-top:12px;">
+                        <span class="label-micro" style="opacity:0.5;">CHARACTERS: <span id="char-count">0</span></span>
+                        <button class="label-micro btn-refine" id="refine-btn" style="background:none; border:none; text-decoration:underline;">++ Refine with AI</button>
+                    </div>
+                </div>
+
+                <div class="nav-controls" style="margin-top:64px; display:flex; gap:20px;">
+                    <button class="nav-btn-prev" style="flex:1; height:60px; background:transparent; border:var(--border-thin); font-family:inherit; font-weight:bold; letter-spacing:0.1em; text-transform:uppercase;">Back</button>
+                    <button class="nav-btn-next" style="flex:2; height:60px; background:#000; color:#fff; border:none; font-family:inherit; font-weight:bold; letter-spacing:0.1em; text-transform:uppercase;">Continue →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Generate Section Template -->
+        <section class="section-view" id="tpl-generate">
+             <div class="section-meta">
+                <div><span class="label-micro">Status</span><div class="text-body" style="text-transform: uppercase;">Review &amp; Finalize</div></div>
+            </div>
+            <h2 class="title-large">FINAL<br>VALIDATION</h2>
+            <div class="grid-2" style="margin-top:var(--space-xl);">
+                 <div class="data-card">
+                    <span class="label-micro">Project Details</span>
+                    <div class="field" style="margin-top:16px;">
+                        <label class="label-micro">Title</label>
+                        <input type="text" id="final-title" class="text-body" style="width:100%; background:transparent; border:none; border-bottom:var(--border-thin); padding:8px 0; font-weight:bold;">
+                    </div>
+                    <div class="field" style="margin-top:24px;">
+                        <label class="label-micro">Presenter Name</label>
+                        <input type="text" id="final-presenter" class="text-body" style="width:100%; background:transparent; border:none; border-bottom:var(--border-thin); padding:8px 0; font-weight:bold;">
+                    </div>
+                </div>
+                <div class="data-card" style="justify-content:center; align-items:center; text-align:center;">
+                    <button id="generate-btn" class="title-large" style="background:var(--fg-black); color:var(--bg-grey); border:none; padding:40px; cursor:pointer;">GENERATE<br>DECK</button>
+                    <p class="label-micro" style="margin-top:24px;">SYSTEM READY FOR PPTX_EXECUTION</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Result Section Template -->
+        <section class="section-view" id="tpl-result">
+            <div class="section-meta">
+                <div><span class="label-micro">Status</span><div class="text-body" style="text-transform: uppercase;">Output Ready</div></div>
+            </div>
+            <h2 class="title-large">FRAMEWORK<br>COMPLETE</h2>
+            <p class="text-body" style="margin-top:32px; max-width:600px;">Your structured narrative has been compiled into a professional presentation framework.</p>
+            
+            <div id="slide-preview-list" style="margin-top:64px; border-top:var(--border-thin);"></div>
+
+            <div style="margin-top:64px; display:flex; gap:20px;">
+                <button id="download-btn" style="flex:1; height:80px; background:#000; color:#fff; border:none; font-family:inherit; font-size:1.5rem; font-weight:bold; letter-spacing:0.1em; text-transform:uppercase;">Download PPTX</button>
+                <button id="restart-btn" style="flex:0.5; height:80px; background:transparent; border:var(--border-thin); font-family:inherit; font-weight:bold; letter-spacing:0.1em; text-transform:uppercase;">New Project</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
