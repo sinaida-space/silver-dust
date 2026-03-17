@@ -365,6 +365,51 @@ textarea {
     border-color: var(--accent-red);
 }
 
+/* FOOTER */
+.app-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    border-top: var(--border-thin);
+    min-height: 40px;
+}
+
+.footer-module {
+    display: flex;
+    align-items: center;
+}
+
+#privacy-trigger:hover {
+    background: var(--fg-black);
+    color: var(--bg-grey);
+}
+
+/* MODAL */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    display: none; /* Controlled by JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--bg-grey);
+    border: var(--border-thick);
+    padding: 64px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    box-shadow: 20px 20px 0px rgba(0,0,0,0.2);
+}
+
 /* SCROLLBAR */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
