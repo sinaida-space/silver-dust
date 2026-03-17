@@ -238,10 +238,11 @@ body {
 }
 
 .display-title {
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    line-height: 0.85;
-    letter-spacing: -0.04em;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
     font-weight: 800;
+    text-transform: uppercase;
 }
 
 .hero-sub {
@@ -510,7 +511,7 @@ button {
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
-    --sidebar-width: 240px;
+    :root { --sidebar-width: 240px; }
     .display-title { font-size: 3rem; }
 }
 
